@@ -16,7 +16,7 @@ import {
 
 export default {
   component: InboxScreen,
-  title: "InboxScreen",
+  title: "InboxScreen_updated",
   decorators: [(story) => <Provider store={store}>{story()}</Provider>],
 };
 
