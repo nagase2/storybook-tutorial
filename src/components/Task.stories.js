@@ -34,6 +34,13 @@ Archived.args = {
   },
 };
 
+export const Archived2 = Template.bind({});
+Archived2.args = {
+  task: {
+    ...Default.args.task,
+    state: "TASK_ARCHIVED",
+  },
+};
 // export const Trial2 = Template.bind({});
 // Archived.args = {
 //   task: {
