@@ -55,56 +55,68 @@ export default {
 
 const Template = () => <TaskList />;
 
-export const Default = Template.bind({});
-Default.decorators = [
-  (story) => <Mockstore taskboxState={MockedState}>{story()}</Mockstore>,
-];
+export const Default = {
+  render: Template,
 
-export const WithPinnedTasks = Template.bind({});
-WithPinnedTasks.decorators = [
-  (story) => {
-    const pinnedtasks = [
-      ...MockedState.tasks.slice(0, 5),
-      { id: "6", title: "Task 6 (pinned)", state: "TASK_PINNED" },
-    ];
+  decorators: [
+    (story) => <Mockstore taskboxState={MockedState}>{story()}</Mockstore>,
+  ],
+};
 
-    return (
+export const WithPinnedTasks = {
+  render: Template,
+
+  decorators: [
+    (story) => {
+      const pinnedtasks = [
+        ...MockedState.tasks.slice(0, 5),
+        { id: "6", title: "Task 6 (pinned)", state: "TASK_PINNED" },
+      ];
+
+      return (
+        <Mockstore
+          taskboxState={{
+            ...MockedState,
+            tasks: pinnedtasks,
+          }}
+        >
+          {story()}
+        </Mockstore>
+      );
+    },
+  ],
+};
+
+export const Loading = {
+  render: Template,
+
+  decorators: [
+    (story) => (
       <Mockstore
         taskboxState={{
           ...MockedState,
-          tasks: pinnedtasks,
+          status: "loading",
         }}
       >
         {story()}
       </Mockstore>
-    );
-  },
-];
+    ),
+  ],
+};
 
-export const Loading = Template.bind({});
-Loading.decorators = [
-  (story) => (
-    <Mockstore
-      taskboxState={{
-        ...MockedState,
-        status: "loading",
-      }}
-    >
-      {story()}
-    </Mockstore>
-  ),
-];
+export const Empty = {
+  render: Template,
 
-export const Empty = Template.bind({});
-Empty.decorators = [
-  (story) => (
-    <Mockstore
-      taskboxState={{
-        ...MockedState,
-        tasks: [],
-      }}
-    >
-      {story()}
-    </Mockstore>
-  ),
-];
+  decorators: [
+    (story) => (
+      <Mockstore
+        taskboxState={{
+          ...MockedState,
+          tasks: [],
+        }}
+      >
+        {story()}
+      </Mockstore>
+    ),
+  ],
+};
